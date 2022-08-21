@@ -1,0 +1,104 @@
+html,body{
+    width: auto;
+    height: auto;
+    position: fixed;
+    top: 0%;
+    bottom: 0%;
+    right: 0%;
+    left: 0%;
+}
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+#serialInput[type=serial]{
+    width: 100%;
+    height: 5%;
+    position: absolute;
+    left: 0%;
+    top: 0%;
+    padding: 1.5%;
+    font-size: larger;
+    border-radius:10px;
+    border: 2px solid   #1a3584;
+}
+#serialInput[type=serial]:focus{
+    border: 2px solid   #152a6a;
+}
+.column {
+    float: left;
+    width: 15%;
+    padding: 5px;
+}
+.column2 {
+    float: left;
+    width: 45%;
+    padding: 5px;
+    margin-left: 30px;
+  }
+  .column3{
+    float: right;
+    width: 21%;
+    padding: 0px;
+}
+.card{
+    height: 8%;
+    top: 8%;
+    width: 100%;
+    border-top-left-radius:10px ;
+    border-top-right-radius: 10px;
+    position: absolute;
+    background-color: #1a3584;
+}
+
+p{
+    color: white;
+    font-size: large;
+}
+#productList{
+    background-color: #f6f4fe;
+    height: 69%;
+    top: 16%;
+    position: absolute;
+    width: 100%;
+    overflow-y: scroll;
+}
+#discount{
+    color: #4aa6a9;
+    font-size: large;
+    line-height: 5px;
+    font-weight: bold;
+}
+#total{
+    color: white;
+    line-height: 5px;
+    font-size: 25px;
+}
+.card2{
+    height: 15%;
+    bottom: 0%;
+    width: 100%;
+    border-bottom-left-radius:10px ;
+    border-bottom-right-radius: 10px;
+    position: absolute;
+    background-color: #1a3584;
+}
+
+#submitBtn{
+    background-color:  #4373c4    ;
+    padding: 2%;
+    width: 10%;
+    height: 10%;
+    border-radius:10px ;
+    bottom: 2.5%;
+    line-height: 3px;
+    right: 2.5%;
+    border: none;
+    font-size: larger;
+    color: white;
+    position: absolute;
+}
+#submitBtn:hover{
+    background-color:  #3d6ec2    ;
+}
