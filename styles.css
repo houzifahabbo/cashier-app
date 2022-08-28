@@ -57,9 +57,11 @@ p{
     font-size: large;
 }
 #productList{
-    background-color: #f6f4fe;
+    background-color: white;
     height: 69%;
     top: 16%;
+    display:flex;
+    flex-direction: column;
     position: absolute;
     width: 100%;
     overflow-y: scroll;
@@ -101,4 +103,84 @@ p{
 }
 #submitBtn:hover{
     background-color:  #3d6ec2    ;
+}
+::-webkit-scrollbar {
+    width: 10px;
+  }
+::-webkit-scrollbar-thumb {
+    background: #1a3584;
+    border-radius: 10px;
+}
+product{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 10%;
+}
+product p{
+    margin-left: 5%;
+    display: flex;
+    flex-direction: row;
+    font-size: larger;
+    color: black;
+}
+price,quantity{
+    height: 100%;
+    width: 20%;
+    top:30%;
+    font-size:large;
+    position:relative
+}
+
+counter{
+ color:gray;
+    width:2.5%;
+    left:1%;
+    top:20%;
+    position:absolute;
+}
+productName{
+ width:42%;
+    font-size:larger;
+    top:17%;
+    left:3%;
+    position:relative;
+}
+deleteBtn{
+   color:white;
+    background-color:#4373c4;
+    width:5%;
+    height:80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left:1%;
+    top:10%;
+    bottom:10%;
+    border-radius:10px;
+    position:relative;
+}
+deleteBtn:hover{
+    background-color:  #3d6ec2    ;
+}
+price{
+    left:4.5%
+}
+quantity{
+
+}
+discount,total{
+ position:absolute;
+    height:50%;
+    right:16%
+}
+discount{
+        bottom:0%;
+    color:gray;
+
+}
+total{
+    right:17%;
+    top:0%;
 }
