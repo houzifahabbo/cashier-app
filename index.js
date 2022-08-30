@@ -1,3 +1,4 @@
+import {fs} from 'fs';
 //TODO clean the code and take a look at the whole code
 let serial;
 function serialInput(evt) {
@@ -128,11 +129,11 @@ function edit(){
 
 
 function invoice(){
-    /*
+    
     var fs = require('fs');
 
     fs.writeFile('mynewfile3.txt', 'Hello content!', function (err) {
       if (err) throw err;
       console.log('Saved!');
-    });*/
+    });
 }
