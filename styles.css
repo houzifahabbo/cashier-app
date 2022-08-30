@@ -6,12 +6,14 @@ html,body{
     bottom: 0%;
     right: 0%;
     left: 0%;
+    counter-reset: section;
 }
 .row:after {
     content: "";
     display: table;
     clear: both;
   }
+
 #serialInput[type=serial]{
     width: 100%;
     height: 5%;
@@ -60,19 +62,18 @@ p{
     background-color: white;
     height: 69%;
     top: 16%;
-    display:flex;
-    flex-direction: column;
+
     position: absolute;
     width: 100%;
     overflow-y: scroll;
 }
-#discount{
+#discount,#discountValue{
     color: #4aa6a9;
     font-size: large;
     line-height: 5px;
     font-weight: bold;
 }
-#total{
+#total,#totalValue{
     color: white;
     line-height: 5px;
     font-size: 25px;
@@ -118,6 +119,13 @@ product{
     width: 100%;
     height: 10%;
 }
+test{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 10%;
+}
 product p{
     margin-left: 5%;
     display: flex;
@@ -140,6 +148,10 @@ counter{
     top:20%;
     position:absolute;
 }
+  counter::before {
+    counter-increment: section;
+    content:counter(section) ". ";
+  }
 productName{
  width:42%;
     font-size:larger;
@@ -167,20 +179,25 @@ deleteBtn:hover{
 price{
     left:4.5%
 }
-quantity{
-
-}
 discount,total{
  position:absolute;
     height:50%;
     right:16%
 }
 discount{
-        bottom:0%;
+    bottom:0%;
     color:gray;
 
 }
 total{
     right:17%;
     top:0%;
+}
+
+product div{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 10%;
 }

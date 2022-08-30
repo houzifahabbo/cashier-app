@@ -1,7 +1,7 @@
 <html>
     <body>
         <link rel="stylesheet" href="styles.css">
-        <input id="serialInput" type="serial" placeholder="Serial / Sku" onkeydown=" return onlyNumberKey(event) && serialInput(event);"></input>
+        <input id="serialInput" type="serial" placeholder="Serial / Sku" onkeydown=" return onlyNumberKey(event) && serialInput(event);" ></input>
         <div class="card">
            <div class="row">
                 <div class="column2">
@@ -21,19 +21,19 @@
         <div class="card2">
             <div class="row">
                  <div class="column2">
-                     <p>Cost before discount</p>
+                     <p> Cost before discount</p>
                      <p id="discount">Discount:</p>
-                     <p id="total">Total to pay</p>
+                     <p id="totalAfterDiscount">Total to pay</p>
                  </div>
                  <div class="column3">
-                     <p>10.20</p>
-                     <p id="discount">5.20</p>
-                     <p id="total">5.00</p>
+                     <p id="totalBeforeDiscountValue">0.00</p>
+                     <p id="discountValue">-0.00</p>
+                     <p id="totalAfterDiscountValue">0.00</p>
                  </div>
              </div>
         </div>
         <div id="productList"></div> 
-        <button id="submitBtn" type="submit" onclick="array()" >submit</button>
-        <script src="index.js"></script>
+        <button id="submitBtn" type="submit" onclick="invoice()" >submit</button>
+        <script type="module" src="index.js"></script>
     </body>
 </html>

@@ -1,4 +1,4 @@
-//username=document.querySelector('#serialInput').value;]
+//TODO clean the code and take a look at the whole code
 let serial;
 function serialInput(evt) {
     if(event.key === 'Enter') {
@@ -35,59 +35,104 @@ function onlyNumberKey(evt) {
     }
     else{
         ++x;
-        console.log(x)
         return true;
     }
 }
+const test2=[[]];
+var quantitySet=0;
+var z=0;
+var loc;
+//TODO remove quantity
 function array(){
-    var index=0;
     const products = ["13579,apple,1,2,0.5", "24695,orange,3,5,1","73584,lemon,2,10,2.5"];
-    for(let i in products){
-        const arr= products[i].split(",");
-        if(arr[0] == serial){
-            console.log(arr[0]);
-            productNam= arr[1];
-            quantit=arr[2];
-            pric=arr[3];
-            discoun=arr[4];
-            addingProducts();
+    for(let x in products){
+        const arr= products[x].split(",");
+        if(z>0&& test2[z-1][0] == serial ){
+            console.log(z-1)
+            loc= (parseInt(test2[(z-1)][5]));
+            quantity1 = (parseInt(test2[(z-1)][2]));
+            quantity1 +=quantitySet;
+            addMore(quantity1,loc);
+            edit()
+
+        }
+        else if(arr[0] == serial){
+                productNam= arr[1];
+                quantit=arr[2];
+                pric=arr[3];
+                discoun=arr[4];
+                test2 [z]= products[x].split(",");
+                test2[z][5]=i;
+                for(let h in test2){
+                    console.log(test2[h])
+                }
+                addingProducts();
+                z++;
+                quantitySet=0;
+                edit()
+
         }
     }
+    quantitySet++;
 }
 var i=1;
 function addingProducts(){
-    const productsList = document.getElementById("productList");
-    const product = document.createElement("product");
-    const counter=document.createElement("counter");
-    const productName=document.createElement("productName");
-    const deleteBtn= document.createElement("deleteBtn");
-    const price= document.createElement("price");
-    const quantity=document.createElement("quantity");
-    const discount=document.createElement("discount");
-    const total=document.createElement("total");
+    //TODO make function for const and ids
+    const total=document.createElement("total"),discount=document.createElement("discount"),quantity=document.createElement("quantity"),price= document.createElement("price"),deleteBtn= document.createElement("deleteBtn"),productName=document.createElement("productName"),productsList = document.getElementById("productList"),product = document.createElement("product"),counter=document.createElement("counter");
     product.setAttribute("id","product"+i);
-    product.setAttribute("value",i)
+    deleteBtn.setAttribute("value",i);
+    quantity.setAttribute("id","quantity"+i);
+    total.setAttribute("id","total"+i);
+    discount.setAttribute("id","discount"+i);
     if (i%2==0){
-       product.style.background= '#f6f4fe' ;
+        product.style.background= '#f6f4fe' ;
         product.classList.add("product"+i);
     }
-    else{
+   else{
         product.classList.add("product"+i);
     }
-    counter.textContent=i+".";
+    //TODO make function for text
     productName.textContent=productNam;
     price.textContent=pric;
     quantity.textContent=quantit;
     total.textContent=pric*quantit;
     discount.textContent="-"+discoun;
-    deleteBtn.setAttribute("onClick", "removeProduct()");
+    deleteBtn.setAttribute("onClick", "removeProduct("+i+")");
     deleteBtn.textContent= "remove";
     product.append(counter , productName , deleteBtn , price ,quantity ,total,discount);
     productsList.appendChild(product);
     ++i;
 }
-function removeProduct(){
-    var i =document.getElementById("product");
-    const element = document.getElementById("product"+i);
+var cost=0;
+var cost2=0;
+function removeProduct(selector){
+    const element = document.getElementById("product"+selector);
+    loc=0;
+    delete test2[selector-1]
+    z=0
+    for(let h in test2){
+        console.log(test2[h])
+    }
     element.remove();
+}
+function addMore(quantity1,loc){
+    document.getElementById("quantity"+loc).innerHTML=quantity1;
+    document.getElementById("total"+loc).innerHTML=pric*quantity1;
+    document.getElementById("discount"+loc).innerHTML="-"+discoun*quantity1;
+}
+function edit(){
+    document.getElementById("totalBeforeDiscountValue").innerHTML=pric*quantity1;
+    document.getElementById("discountValue").innerHTML="-"+discoun*quantity1;
+    document.getElementById("totalAfterDiscountValue").innerHTML=(pric-discoun)*quantity1;
+}
+
+
+function invoice(){
+    /*
+    var fs = require('fs');
+
+    fs.writeFile('mynewfile3.txt', 'Hello content!', function (err) {
+      if (err) throw err;
+      console.log('Saved!');
+    });*/
 }
