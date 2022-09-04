@@ -10,7 +10,7 @@ function serialInput(evt) {
         array();
     }
 }
-function onlyNumberKey(evt) {
+/*function onlyNumberKey(evt) {
     var ASCIICode = (evt.which) ? evt.which : evt.keyCode
     if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57) && (ASCIICode < 96 || ASCIICode > 106)){
         return false;
@@ -40,7 +40,7 @@ function onlyNumberKey(evt) {
         ++x;
         return true;
     }
-}
+}*/
 const test2=[[]];
 const test3=[];
 const test4=[];
@@ -74,7 +74,7 @@ function array(){
             z++;
         }
         else{
-            console.log("wrong")
+            alert("wrong serial number");
         }
     }
     sett()
@@ -115,6 +115,7 @@ function removeProduct(selector){
     delete test2[selector-1]
     z=0
     element.remove();
+    decrease(selector);
     edit();
 }
 
@@ -151,22 +152,23 @@ var discountValueTotal=0;
 function sett(){
     test3[z-1]=totalBeforeDiscount;
     test4[z-1]=discount;
-   // test5[z-1]=totalAfterDiscount
-    /*for (let index = 0; index < test3.length; index++) {
-        total2 +=+ parseInt(test3[index]);
-        console.log(test3[index]);
-    }*/
-    /*  const total2 = test3.reduce((accumulator, value) => {
+    discountValueTotal=0
+    total2=0
+    const total3 = test3.reduce((accumulator, value) => {
         return accumulator + value;
-      }, 0);*/
-      total2=0
-      discountValueTotal=0
-      for (const value of test3) {
+    }, 0);
+    total2=total3
+      /*for (const value of test3) {
         total2 += value;
-      }
-      for (const value of test4) {
+      }*/
+    for (const value of test4) {
         discountValueTotal+= value;
-      }
-      totalAfterDiscount=total2-discountValueTotal
-
     }
+    totalAfterDiscount=total2-discountValueTotal
+}
+function decrease(selector){
+    total2-=test3[selector-1];
+    discountValueTotal-=test4[selector-1]
+    totalAfterDiscount=total2-discountValueTotal
+
+}
