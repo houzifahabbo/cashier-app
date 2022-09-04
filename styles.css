@@ -1,203 +1,201 @@
-html,body{
-    width: auto;
-    height: auto;
-    position: fixed;
-    top: 0%;
-    bottom: 0%;
-    right: 0%;
-    left: 0%;
-    counter-reset: section;
+html,
+body {
+  width: auto;
+  height: auto;
+  position: fixed;
+  top: 0%;
+  bottom: 0%;
+  right: 0%;
+  left: 0%;
+  counter-reset: section;
+}
+
+#serialInput[type="serial"] {
+  width: 100%;
+  height: 5%;
+  position: absolute;
+  left: 0%;
+  top: 0%;
+  padding: 1.5%;
+  font-size: larger;
+  border-radius: 10px;
+  border: 2px solid #1a3584;
+}
+#serialInput[type="serial"]:focus {
+  border: 2px solid #152a6a;
+}
+
+.column {
+  float: left;
+  padding: 5px;
+}
+.column.big,.column.left {
+    width: 45%;
+    margin-left: 30px;
+}
+.column.small{
+  width: 15%;
+}
+.column.right {
+  float: right;
+  width: 21%;
+  padding: 0px;
 }
 .row:after {
     content: "";
     display: table;
     clear: both;
-  }
+}
 
-#serialInput[type=serial]{
-    width: 100%;
-    height: 5%;
-    position: absolute;
-    left: 0%;
-    top: 0%;
-    padding: 1.5%;
-    font-size: larger;
-    border-radius:10px;
-    border: 2px solid   #1a3584;
-}
-#serialInput[type=serial]:focus{
-    border: 2px solid   #152a6a;
-}
-.column {
-    float: left;
-    width: 15%;
-    padding: 5px;
-}
-.column2 {
-    float: left;
-    width: 45%;
-    padding: 5px;
-    margin-left: 30px;
-  }
-  .column3{
-    float: right;
-    width: 21%;
-    padding: 0px;
-}
 .card{
-    height: 8%;
-    top: 8%;
-    width: 100%;
-    border-top-left-radius:10px ;
-    border-top-right-radius: 10px;
     position: absolute;
     background-color: #1a3584;
-}
-
-p{
-    color: white;
-    font-size: large;
-}
-#productList{
-    background-color: white;
-    height: 69%;
-    top: 16%;
-
-    position: absolute;
     width: 100%;
-    overflow-y: scroll;
 }
-#discount,#discountValue{
-    color: #4aa6a9;
-    font-size: large;
-    line-height: 5px;
-    font-weight: bold;
+.card.top {
+  height: 8%;
+  top: 8%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
-#total,#totalValue{
-    color: white;
-    line-height: 5px;
-    font-size: 25px;
-}
-.card2{
+.card.bottom {
     height: 15%;
     bottom: 0%;
-    width: 100%;
-    border-bottom-left-radius:10px ;
+    border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-    position: absolute;
-    background-color: #1a3584;
 }
 
-#submitBtn{
-    background-color:  #4373c4    ;
-    padding: 2%;
-    width: 10%;
-    height: 10%;
-    border-radius:10px ;
-    bottom: 2.5%;
-    line-height: 3px;
-    right: 2.5%;
-    border: none;
-    font-size: larger;
-    color: white;
-    position: absolute;
+p {
+  color: white;
+  font-size: large;
 }
-#submitBtn:hover{
-    background-color:  #3d6ec2    ;
+#productList {
+  background-color: white;
+  height: 69%;
+  top: 16%;
+  position: absolute;
+  width: 100%;
+  overflow-y: scroll;
+}
+#discountText,
+#discountValue {
+  color: #4aa6a9;
+  font-size: large;
+  line-height: 5px;
+  font-weight: bold;
+}
+#totalAfterDiscountText,
+#totalAfterDiscountValue {
+  color: white;
+  line-height: 5px;
+  font-size: 27px;
+}
+
+
+#submitBtn {
+  background-color: #4373c4;
+  padding: 2%;
+  width: 10%;
+  height: 10%;
+  border-radius: 10px;
+  bottom: 2.5%;
+  line-height: 3px;
+  right: 2.5%;
+  border: none;
+  font-size: larger;
+  color: white;
+  position: absolute;
+}
+#submitBtn:hover {
+  background-color: #3d6ec2;
 }
 ::-webkit-scrollbar {
-    width: 10px;
-  }
+  width: 10px;
+}
 ::-webkit-scrollbar-thumb {
-    background: #1a3584;
-    border-radius: 10px;
+  background: #1a3584;
+  border-radius: 10px;
 }
-product{
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    height: 10%;
+product {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 10%;
 }
-test{
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    height: 10%;
+test {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 10%;
 }
-product p{
-    margin-left: 5%;
-    display: flex;
-    flex-direction: row;
-    font-size: larger;
-    color: black;
+product p {
+  margin-left: 5%;
+  display: flex;
+  flex-direction: row;
+  font-size: larger;
+  color: black;
 }
-price,quantity{
-    height: 100%;
-    width: 20%;
-    top:30%;
-    font-size:large;
-    position:relative
-}
-
-counter{
- color:gray;
-    width:2.5%;
-    left:1%;
-    top:20%;
-    position:absolute;
-}
-  counter::before {
-    counter-increment: section;
-    content:counter(section) ". ";
-  }
-productName{
- width:42%;
-    font-size:larger;
-    top:17%;
-    left:3%;
-    position:relative;
-}
-deleteBtn{
-   color:white;
-    background-color:#4373c4;
-    width:5%;
-    height:80%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    left:1%;
-    top:10%;
-    bottom:10%;
-    border-radius:10px;
-    position:relative;
-}
-deleteBtn:hover{
-    background-color:  #3d6ec2    ;
-}
-price{
-    left:4.5%
-}
-discount,total{
- position:absolute;
-    height:50%;
-    right:16%
-}
-discount{
-    bottom:0%;
-    color:gray;
-
-}
-total{
-    right:17%;
-    top:0%;
+price,
+quantity {
+  height: 100%;
+  width: 20%;
+  top: 30%;
+  font-size: large;
+  position: relative;
 }
 
-product div{
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    height: 10%;
+counter {
+  color: gray;
+  width: 2.5%;
+  left: 1%;
+  top: 20%;
+  position: absolute;
+}
+counter::before {
+  counter-increment: section;
+  content: counter(section) ". ";
+}
+productName {
+  width: 42%;
+  font-size: larger;
+  top: 17%;
+  left: 3%;
+  position: relative;
+}
+deleteBtn {
+  display: block;
+  color: white;
+  background-color: #4373c4;
+  width: 5%;
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: 1%;
+  top: 10%;
+  bottom: 10%;
+  border-radius: 10px;
+  position: relative;
+}
+deleteBtn:hover {
+  background-color: #3d6ec2;
+}
+price {
+  left: 4.5%;
+}
+discount,
+total {
+  position: absolute;
+  height: 50%;
+  right: 16%;
+}
+discount {
+  bottom: 0%;
+  color: gray;
+}
+total {
+  right: 17%;
+  top: 0%;
 }

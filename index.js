@@ -1,13 +1,15 @@
-import {fs} from 'fs';
 //TODO clean the code and take a look at the whole code
 let serial;
+var totalBeforeDiscount=0;
+var discountValue=0;
+var totalAfterDiscount=0;
+var x=0;
 function serialInput(evt) {
     if(event.key === 'Enter') {
         serial = document.getElementById("serialInput").value;
         array();
     }
 }
-var x=0;
 function onlyNumberKey(evt) {
     var ASCIICode = (evt.which) ? evt.which : evt.keyCode
     if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57) && (ASCIICode < 96 || ASCIICode > 106)){
@@ -40,41 +42,43 @@ function onlyNumberKey(evt) {
     }
 }
 const test2=[[]];
-var quantitySet=0;
+const test3=[];
+const test4=[];
 var z=0;
 var loc;
-//TODO remove quantity
+var sum=0;
+var quantityValue=0;
+var quantitySet=0;
+//TODO rename lists
 function array(){
-    const products = ["13579,apple,1,2,0.5", "24695,orange,3,5,1","73584,lemon,2,10,2.5"];
+    const products = ["13579,apple,2,0.5", "24695,orange,5,1","73584,lemon,10,2.5"];
+    quantitySet++;
     for(let x in products){
         const arr= products[x].split(",");
-        if(z>0&& test2[z-1][0] == serial ){
-            console.log(z-1)
-            loc= (parseInt(test2[(z-1)][5]));
-            quantity1 = (parseInt(test2[(z-1)][2]));
-            quantity1 +=quantitySet;
-            addMore(quantity1,loc);
-            edit()
-
+       if(z>0&&test2[z-1][0] == serial ){
+            loc= (parseInt(test2[z-1][4]));
+            test2[z-1][5]=quantitySet;
+            quantityValue=test2[z-1][5]
+            addMore(loc);
         }
         else if(arr[0] == serial){
-                productNam= arr[1];
-                quantit=arr[2];
-                pric=arr[3];
-                discoun=arr[4];
-                test2 [z]= products[x].split(",");
-                test2[z][5]=i;
-                for(let h in test2){
-                    console.log(test2[h])
-                }
-                addingProducts();
-                z++;
-                quantitySet=0;
-                edit()
-
+            productNameValue= arr[1];
+            priceValue=arr[2];
+            discountValue=arr[3];
+            test2 [z]= products[x].split(",");
+            test2[z][4]=i;
+            quantitySet=1;
+            test2[z][5]=quantitySet;
+            quantityValue=test2[z][5]
+            addingProducts(); 
+            z++;
+        }
+        else{
+            console.log("wrong")
         }
     }
-    quantitySet++;
+    sett()
+    edit();
 }
 var i=1;
 function addingProducts(){
@@ -93,47 +97,76 @@ function addingProducts(){
         product.classList.add("product"+i);
     }
     //TODO make function for text
-    productName.textContent=productNam;
-    price.textContent=pric;
-    quantity.textContent=quantit;
-    total.textContent=pric*quantit;
-    discount.textContent="-"+discoun;
+    productName.textContent=productNameValue;
+    price.textContent=priceValue;
+    quantity.textContent=quantityValue;
+    total.textContent=totalBeforeDiscount;
+    discount.textContent="- "+discountValue;
     deleteBtn.setAttribute("onClick", "removeProduct("+i+")");
     deleteBtn.textContent= "remove";
     product.append(counter , productName , deleteBtn , price ,quantity ,total,discount);
     productsList.appendChild(product);
     ++i;
 }
-var cost=0;
-var cost2=0;
+//TODO remove
 function removeProduct(selector){
     const element = document.getElementById("product"+selector);
     loc=0;
     delete test2[selector-1]
     z=0
-    for(let h in test2){
-        console.log(test2[h])
-    }
     element.remove();
-}
-function addMore(quantity1,loc){
-    document.getElementById("quantity"+loc).innerHTML=quantity1;
-    document.getElementById("total"+loc).innerHTML=pric*quantity1;
-    document.getElementById("discount"+loc).innerHTML="-"+discoun*quantity1;
-}
-function edit(){
-    document.getElementById("totalBeforeDiscountValue").innerHTML=pric*quantity1;
-    document.getElementById("discountValue").innerHTML="-"+discoun*quantity1;
-    document.getElementById("totalAfterDiscountValue").innerHTML=(pric-discoun)*quantity1;
+    edit();
 }
 
+function addMore(loc){
+    getAndEditElements(("quantity"+loc),quantityValue);
+    getAndEditElements(("total"+loc),totalBeforeDiscount);
+    getAndEditElements(("discount"+loc),discount);
+}
+
+function edit(){
+    getAndEditElements("totalBeforeDiscountValue",total2);
+    getAndEditElements("discountValue",discountText);
+    getAndEditElements("totalAfterDiscountValue",totalAfterDiscount);
+}
+
+function getAndEditElements(id,value){
+    totalBeforeDiscount=(priceValue*quantityValue)
+    discount = discountValue*quantityValue;
+    discountText= "- "+discountValueTotal;
+    //totalAfterDiscount +=((priceValue-discountValue)*quantityValue);
+    document.getElementById(id).innerHTML= value ;
+}
 
 function invoice(){
-    
-    var fs = require('fs');
-
-    fs.writeFile('mynewfile3.txt', 'Hello content!', function (err) {
-      if (err) throw err;
-      console.log('Saved!');
+    $ (document).ready(function(){
+        var currentPath = $(location).attr('href').replace("index.html","styles.css");
+        $('#invoiceLayout').printThis({debug: false,importCSS: true,loadCSS: currentPath});
+        $("deleteBtn").hide();
     });
+    setTimeout(function(){$("deleteBtn").show()},1000)
 }
+var total2=0;
+var discountValueTotal=0;
+function sett(){
+    test3[z-1]=totalBeforeDiscount;
+    test4[z-1]=discount;
+   // test5[z-1]=totalAfterDiscount
+    /*for (let index = 0; index < test3.length; index++) {
+        total2 +=+ parseInt(test3[index]);
+        console.log(test3[index]);
+    }*/
+    /*  const total2 = test3.reduce((accumulator, value) => {
+        return accumulator + value;
+      }, 0);*/
+      total2=0
+      discountValueTotal=0
+      for (const value of test3) {
+        total2 += value;
+      }
+      for (const value of test4) {
+        discountValueTotal+= value;
+      }
+      totalAfterDiscount=total2-discountValueTotal
+
+    }

@@ -1,39 +1,49 @@
 <html>
-    <body>
-        <link rel="stylesheet" href="styles.css">
-        <input id="serialInput" type="serial" placeholder="Serial / Sku" onkeydown=" return onlyNumberKey(event) && serialInput(event);" ></input>
-        <div class="card">
-           <div class="row">
-                <div class="column2">
+
+<head>
+    <link rel="stylesheet" href="styles.css">
+    <script src="index.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="printThis.js "></script>
+</head>
+
+<body>
+    <input id="serialInput" type="serial" placeholder="Serial / Sku"
+        onkeydown=" return onlyNumberKey(event) && serialInput(event);"></input>
+    <div id="invoiceLayout">
+        <div class="card top">
+            <div class="row">
+                <div class="column big">
                     <p>IN CART</p>
                 </div>
-                <div class="column">
+                <div class="column small">
                     <p>PRICE $</p>
                 </div>
-                <div class="column">
+                <div class="column small">
                     <p>QUANTITY</p>
                 </div>
-                <div class="column">
+                <div class="column small">
                     <p>TOTAL</p>
                 </div>
             </div>
         </div>
-        <div class="card2">
+        <div class="card bottom">
             <div class="row">
-                 <div class="column2">
-                     <p> Cost before discount</p>
-                     <p id="discount">Discount:</p>
-                     <p id="totalAfterDiscount">Total to pay</p>
-                 </div>
-                 <div class="column3">
-                     <p id="totalBeforeDiscountValue">0.00</p>
-                     <p id="discountValue">-0.00</p>
-                     <p id="totalAfterDiscountValue">0.00</p>
-                 </div>
-             </div>
+                <div class="column left">
+                    <p> Cost before discount</p>
+                    <p id="discountText">Discount:</p>
+                    <p id="totalAfterDiscountText">Total to pay:</p>
+                </div>
+                <div class="column right">
+                    <p id="totalBeforeDiscountValue">0.00</p>
+                    <p id="discountValue">- 0.00</p>
+                    <p id="totalAfterDiscountValue">0.00</p>
+                </div>
+            </div>
         </div>
-        <div id="productList"></div> 
-        <button id="submitBtn" type="submit" onclick="invoice()" >submit</button>
-        <script type="module" src="index.js"></script>
-    </body>
+        <div class="produtList" id="productList"></div>
+    </div>
+    <button id="submitBtn" onclick="invoice()">submit</button>
+</body>
+
 </html>
