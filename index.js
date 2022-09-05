@@ -57,16 +57,16 @@ function checkSerialInput() {
             SerialNumbersForProductsInCart[NumberOfProductShown] = serialNumberValue;
             addingProductsInCart();
             NumberOfProductShown++;
+            editValues();
         }
     }
+    sumValues();
+    editValues();
 
     if (serialNumberValue != SerialNumbersForProductsInCart[NumberOfProductShown - 1]) {
         alert("wrong serial number")
     }
-
-    sumValues();
-    editValues();
-
+    
 }
 
 function editValues() {
@@ -152,6 +152,8 @@ function addingProductsInCart() {
         product.classList.add("product" + productOrder);
     }
 
+    totalBeforeDiscount = priceValue * quantityValue;
+
     textEditor(productName, productNameValue);
     textEditor(price, priceValue);
     textEditor(quantity, quantityValue);
@@ -197,7 +199,7 @@ function sumValues() {
         discountForAllProductsInCart.splice((productPosition - 1), 1, discount);
     }
 
-    else {
+    else if (increaseQuantityToExistProductFunctionValue == false){
         totalForAllProductsInCart[NumberOfProductShown - 1] = totalBeforeDiscount;
         discountForAllProductsInCart[NumberOfProductShown - 1] = discount;
     }
