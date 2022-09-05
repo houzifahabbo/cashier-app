@@ -23,6 +23,7 @@ function serialInput(evt) {
     }
 
 }
+
 function checkSerialInput() {
 
     const products = ["13579,apple,2,0.5", "24695,orange,5,1", "73584,lemon,10,2.5", "12345,chocolate,4,0", "25814,soap,8,2", "14365,yogurt,3,0", "75958,milk,10,3", "52369,water,1,0", "45678,cup,5,0", "85296,plate,15,2", "70395,watermelon,30,8", "29438,pear,3,0", "90145,banana,15,4", "50179,peach,6,0.5"];
