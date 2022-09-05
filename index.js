@@ -1,164 +1,218 @@
-let serial;
+let serialNumberValue;
 var totalBeforeDiscount=0;
 var discountValue=0;
 var totalAfterDiscount=0;
-const test2=[[]];
-const test5=[]
-const test3=[];
-const test4=[];
-var i=1;
-var z=0;
-var loc;
-var ex =0;
-var sum=0;
+const productsInCart=[[]];
+const SerialNumbersForProductsInCart=[];
+const totalForAllProductsInCart=[];
+const discountForAllProductsInCart=[];
+var productOrder=1;
+var NumberOfProductShown=0;
+var productPosition;
+var increaseQuantityToExistProductFunctionValue = false;
 var quantityValue=0;
 var quantitySet=0;
-var total2=0;
+var totalBeforeDiscountValue=0;
 var discountValueTotal=0;
-//TODO clean the code and take a look at the whole code
-//TODO rename lists
+
 function serialInput(evt) {
+
     if(event.key === 'Enter') {
-        serial = document.getElementById("serialInput").value;
-        array();
+        serialNumberValue = document.getElementById("serialInput").value;
+        checkSerialInput();
     }
+
 }
-function array(){
+function checkSerialInput(){
+
     const products = ["13579,apple,2,0.5", "24695,orange,5,1","73584,lemon,10,2.5"];
-    ex=0;
-    quantitySet++;
-    if(z>0){
-        exist();
+
+    increaseQuantityToExistProductFunctionValue = false;
+    quantitySet ++;
+
+    if(NumberOfProductShown > 0){
+        increaseQuantityToExistProduct();
     }
+
     for(let x in products){
-        const arr= products[x].split(",");
-        if(z>0 && test2[z-1][0] == serial ){
-            loc= (parseInt(test2[z-1][4]));
-            test2[z-1][5]=quantitySet;
-            quantityValue=test2[z-1][5]
-            addMore(loc);
-        }
-        else if(arr[0] == serial && ex==0){
-            productNameValue= arr[1];
-            priceValue=arr[2];
-            discountValue=arr[3];
-            test2 [z]= products[x].split(",");
-            test2[z][4]=i;
-            quantitySet=1;
-            test2[z][5]=quantitySet;
-            quantityValue=test2[z][5]
-            test5[z]=serial;
-            addingProducts(); 
-            z++;
-        }
-    }
-    sett();
-    edit();
-}
+        const productsArraySplitted = products[x].split(",");
 
-function exist(){
-    for(let x in test5){
-        if(test5[x] == serial &&z>0){
-            loc= (parseInt(test2[x][4]))
-            quantitySet=test2[x][5]
-            quantitySet++
-            test2[x][5]=quantitySet;
-            quantityValue=test2[x][5]
-            priceValue=test2[x][2];
-            discountValue=test2[x][3];
-            addMore(loc);
-            ex=1;
+        if(NumberOfProductShown > 0 && productsInCart[NumberOfProductShown - 1][0] == serialNumberValue ){
+            productPosition = parseInt(productsInCart[NumberOfProductShown - 1][4]);
+            productsInCart[NumberOfProductShown - 1][5] = quantitySet;
+            quantityValue = productsInCart[NumberOfProductShown - 1][5];
+            updateProductCardInfo(productPosition);
+        }
+
+        else if(productsArraySplitted[0] == serialNumberValue && increaseQuantityToExistProductFunctionValue == 0){
+            productNameValue = productsArraySplitted[1];
+            priceValue = productsArraySplitted[2];
+            discountValue = productsArraySplitted[3];
+            productsInCart[NumberOfProductShown] = products[x].split(",");
+            productsInCart[NumberOfProductShown][4] = productOrder;
+            quantitySet = 1;
+            productsInCart[NumberOfProductShown][5] = quantitySet;
+            quantityValue = productsInCart[NumberOfProductShown][5];
+            SerialNumbersForProductsInCart[NumberOfProductShown] = serialNumberValue;
+            addingProductsInCart(); 
+            NumberOfProductShown ++;
         }
     }
-}
-function addingProducts(){
-    //TODO make function for const and ids
-    const total=document.createElement("total"),discount=document.createElement("discount"),quantity=document.createElement("quantity"),price= document.createElement("price"),deleteBtn= document.createElement("deleteBtn"),productName=document.createElement("productName"),productsList = document.getElementById("productList"),product = document.createElement("product"),counter=document.createElement("counter");
-    product.setAttribute("id","product"+i);
-    deleteBtn.setAttribute("value",i);
-    quantity.setAttribute("id","quantity"+i);
-    total.setAttribute("id","total"+i);
-    discount.setAttribute("id","discount"+i);
-    deleteBtn.setAttribute("onClick", "removeProduct("+i+")");
-    if (i%2==0){
-        product.style.background= '#f6f4fe' ;
-        product.classList.add("product"+i);
+
+    if(serialNumberValue != SerialNumbersForProductsInCart[NumberOfProductShown - 1]  ){
+        alert("wrong serial number")
     }
-   else{
-        product.classList.add("product"+i);
+
+    sumValues();
+    editValues();
+
+}
+
+function sumValues(){
+
+    if(increaseQuantityToExistProductFunctionValue == true){
+        totalForAllProductsInCart.splice((productPosition - 1) , 1 , totalBeforeDiscount);
+        discountForAllProductsInCart.splice((productPosition - 1) , 1 , discount);
     }
-    //TODO make function for text
-    productName.textContent=productNameValue;
-    price.textContent=priceValue;
-    quantity.textContent=quantityValue;
-    total.textContent=totalBeforeDiscount;
-    discount.textContent="- "+discountValue;
-    deleteBtn.textContent= "remove";
-    product.append(counter , productName , deleteBtn , price ,quantity ,total,discount);
-    productsList.appendChild(product);
-    ++i;
-}
-//TODO remove
-function removeProduct(selector){
-    const element = document.getElementById("product"+selector);
-    loc=0;
-    delete test2[selector-1]
-    z=0
-    element.remove();
-    decrease(selector);
-    edit();
-}
 
-function addMore(loc){
-    getAndEditElements(("quantity"+loc),quantityValue);
-    getAndEditElements(("total"+loc),totalBeforeDiscount);
-    getAndEditElements(("discount"+loc),"- "+discount);
-}
-
-function edit(){
-    getAndEditElements("totalBeforeDiscountValue",total2);
-    getAndEditElements("discountValue",discountText);
-    getAndEditElements("totalAfterDiscountValue",totalAfterDiscount);
-}
-
-function getAndEditElements(id,value){
-    totalBeforeDiscount=(priceValue*quantityValue)
-    discount = discountValue*quantityValue;
-    discountText=discountValueTotal;
-    document.getElementById(id).innerHTML= value ;
-}
-
-function invoice(){
-    $ (document).ready(function(){
-        var currentPath = $(location).attr('href').replace("index.html","styles.css");
-        $('#invoiceLayout').printThis({debug: false,importCSS: true,loadCSS: currentPath});
-        $("deleteBtn").hide();
-    });
-    setTimeout(function(){$("deleteBtn").show()},1000);
-}
-
-function sett(){
-    if(ex==1){
-        test3.splice( (loc - 1) , 1 , totalBeforeDiscount );
-        test4.splice( (loc - 1) , 1 , discount );
-   }
     else{
-        test3[z-1]=totalBeforeDiscount;
-        test4[z-1]=discount;
+        totalForAllProductsInCart[NumberOfProductShown - 1] = totalBeforeDiscount;
+        discountForAllProductsInCart[NumberOfProductShown - 1] = discount;
     }
-    const total3 = test3.reduce((accumulator, value) => {
+
+    const temp = totalForAllProductsInCart.reduce((accumulator, value) => {
         return accumulator + value;
     }, 0);
-    total2=total3;
-    const discountValueTotal2 = test4.reduce((accumulator, value) => {
+    totalBeforeDiscountValue = temp;
+
+    const temp1 = discountForAllProductsInCart.reduce((accumulator, value) => {
         return accumulator - value;
     }, 0);
-    discountValueTotal=discountValueTotal2;
-    totalAfterDiscount = total2 + discountValueTotal;
-}
-function decrease(selector){
-    total2 -= test3[selector-1];
-    discountValueTotal += test4[selector-1];
-    totalAfterDiscount = total2 - discountValueTotal;
+    discountValueTotal = temp1;
+
+    totalAfterDiscount = totalBeforeDiscountValue + discountValueTotal;
 
 }
+
+function editValues(){
+
+    getAndEditElements("totalBeforeDiscountValue" , totalBeforeDiscountValue);
+    getAndEditElements("discountValue" , discountText);
+    getAndEditElements("totalAfterDiscountValue" , totalAfterDiscount);
+
+}
+
+function getAndEditElements(id , value){
+
+    totalBeforeDiscount = priceValue * quantityValue;
+    discount = discountValue * quantityValue;
+    discountText = discountValueTotal;
+
+    document.getElementById(id).innerHTML = value ;
+
+}
+
+function updateProductCardInfo(productPosition){
+
+    getAndEditElements(("quantity" + productPosition) , quantityValue);
+    getAndEditElements(("total" + productPosition) , totalBeforeDiscount);
+    getAndEditElements(("discount" + productPosition) , "- " + discount);
+
+}
+
+function increaseQuantityToExistProduct(){
+
+    for(let x in SerialNumbersForProductsInCart){
+        if(SerialNumbersForProductsInCart[x] == serialNumberValue && NumberOfProductShown > 0){
+            productPosition = parseInt(productsInCart[x][4]);
+            quantitySet = productsInCart[x][5];
+            quantitySet ++;
+            productsInCart[x][5] = quantitySet;
+            quantityValue = productsInCart[x][5];
+            priceValue = productsInCart[x][2];
+            discountValue = productsInCart[x][3];
+            updateProductCardInfo(productPosition);
+            increaseQuantityToExistProductFunctionValue = true;
+        }
+    }
+}
+
+function decreaseQuantityToExistProduct(selector){
+
+    totalBeforeDiscountValue -= totalForAllProductsInCart[selector - 1];
+    discountValueTotal += discountForAllProductsInCart[selector - 1];
+    totalAfterDiscount = totalBeforeDiscountValue - discountValueTotal;
+
+}
+
+
+function setAttributeForObjects(object,attribute,valueOfAttribute){
+
+    object.setAttribute(attribute , valueOfAttribute);
+
+}
+
+function textEditor(object,valueOfTheText){
+
+    object.textContent = valueOfTheText;
+
+}
+
+function addingProductsInCart(){
+
+    const total = document.createElement("total") , discount = document.createElement("discount") , quantity = document.createElement("quantity") , price = document.createElement("price") , deleteBtn = document.createElement("deleteBtn") , productName = document.createElement("productName") , productsList = document.getElementById("productList") , product = document.createElement("product") , counter = document.createElement("counter");
+    
+    setAttributeForObjects(product , "id" , "product" + productOrder);
+    setAttributeForObjects(quantity , "id" , "quantity" + productOrder);
+    setAttributeForObjects(total , "id" , "total" + productOrder);
+    setAttributeForObjects(discount , "id" , "discount" + productOrder);
+    setAttributeForObjects(deleteBtn , "onClick" , "removeProductsInCart("+productOrder+")");
+    
+    if (productOrder % 2 == 0){
+        product.style.background = '#f6f4fe';
+        product.classList.add("product" + productOrder);
+    }
+    
+    else{
+        product.classList.add("product" + productOrder);
+    }
+    
+    textEditor(productName , productNameValue);
+    textEditor(price , priceValue);
+    textEditor(quantity , quantityValue);
+    textEditor(total , totalBeforeDiscount);
+    textEditor(discount , "- " + discountValue);
+    textEditor(deleteBtn , "remove");
+    
+    product.append(counter , productName , deleteBtn , price , quantity , total, discount);
+    productsList.appendChild(product);
+    
+    productOrder ++;
+
+}
+
+function removeProductsInCart(selector){
+
+    const element = document.getElementById("product" + selector);
+    productPosition = 0;
+    delete productsInCart[selector - 1];
+    NumberOfProductShown = 0;
+    element.remove();
+    decreaseQuantityToExistProduct(selector);
+    editValues();
+
+}
+
+function invoicePrinterAndSaver(){
+
+    $ (document).ready(function(){
+        var currentPath = $(location).attr('href').replace("index.html" , "styles.css");
+        $('#invoiceLayout').printThis({importCSS: true , loadCSS: currentPath});
+        $("deleteBtn").hide();
+    });
+
+    setTimeout(function(){$("deleteBtn").show()},1000);
+    
+}
+
+
